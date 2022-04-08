@@ -1,0 +1,26 @@
+.logo {
+  line-height: 32px;
+  color: black;
+  font-size: 18px;
+  margin: 10px;
+  text-align: center;
+  background: white;
+}
+.SiderBox {
+  position: relative;
+  overflow: auto;
+}
+.capacity {
+  z-index: 999;
+  position: absolute;
+  bottom: 45px;
+  left: 25px;
+}
+.capacityNum {
+  color: #afb3bf;
+  font-size: 10px;
+}
+.logoSmall {
+  font-weight: 900;
+  cursor: pointer;
+}

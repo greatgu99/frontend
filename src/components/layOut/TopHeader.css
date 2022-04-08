@@ -1,0 +1,14 @@
+.iconCollapsed {
+  width: 25px;
+  cursor: pointer;
+}
+.trigger {
+  cursor: pointer;
+  position: absolute;
+  top: -2px;
+  right: 20px;
+}
+
+.trigger :hover {
+  background: rgb(233, 247, 254);
+}

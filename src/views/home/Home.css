@@ -1,0 +1,6 @@
+.ant-carousel .slick-dots li button {
+  margin-top: 30px !important;
+  height: 5px !important;
+  background: black !important;
+  color: black !important;
+}

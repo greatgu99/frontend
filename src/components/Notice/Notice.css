@@ -1,0 +1,24 @@
+.btn {
+  width: 100%;
+  height: 114px;
+  /* font-size:18px; */
+  padding:10px;
+  /* font-weight: bold; */
+  align-items: center;
+  justify-content: center;
+  /* margin: 0; */
+  position: relative;
+}
+.btn:hover {
+  background-color: #f3f3f3;
+}
+
+.circle{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: red;
+  position: absolute;
+  top:-5px;
+  right:-5px;
+}
