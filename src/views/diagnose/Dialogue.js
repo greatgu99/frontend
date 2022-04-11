@@ -14,7 +14,8 @@ export default function Dialogue(props){
   const [num,setNum] = useState(0)
   const [explicit_inform_slot,setExplicit_inform_slot] = useState({})
   const [implicit_inform_slot,setImplicit_inform_slot] = useState({})
-  const [result,setResult] = useState('')
+  const [result, setResult] = useState('')
+  const [hasResult, setHasResult] = useState(false)
 
   const onChange = e => {
     console.log('radio checked', e.target.value);
@@ -24,36 +25,33 @@ export default function Dialogue(props){
     if (value===null){
       setShowWarning(true)
     } else {
-      implicit_inform_slot['']
+      let implicit_inform_slott = {...implicit_inform_slot,question:value}
+
       let requestData = {
         action:'diagnose',
         data:{
           explicit_inform_slot,
-          implicit_inform_slot
+          implicit_inform_slott
         },
-        num
+        num:num+1
       }
       http
         .post("/backend/diagnose", requestData)
         .then(res => {
           console.log(res);
           if (res.result == false){
-            setImplicit_inform_slot({...implicit_inform_slot,{res.symptom:})
-          }
-          if (res.status >= 200 && res.status <= 300) {
-            console.log(res)
-            if (res.data)
             setData([...data,{
               key:data.length+1,
-              name:,
+              name:question,
               judge:value,
-              description:"啦啦啦啦"
+              description:"暂无描述"
             }])
+            setQuestion(res.symptom)
             setValue(null)
             setShowWarning(false)
-            setNum(num+1)
           } else {
-            console.log(res.error);
+            setHasResult(true)
+            setResult(res.disease)
           }
         })
         .catch(error => {
@@ -61,7 +59,8 @@ export default function Dialogue(props){
         });
 
       //异步请求
-
+      setImplicit_inform_slot({...implicit_inform_slot,question:value})
+      setNum(num+1)
     }
   }
   const columns = [
@@ -89,104 +88,103 @@ export default function Dialogue(props){
     },
   ];
   
-  const data1 = [
-    {
-      key: '1',
-      name: '头疼',
-      judge: true,
-      description: "噜啦噜啦嘿",
-    },
-    {
-      key: '2',
-      name: '流涕',
-      judge: false,
-      description: "噜啦噜啦嘿",
-    },
-    {
-      key: '3',
-      name: '腰酸',
-      judge: true,
-      description: "噜啦噜啦嘿",
-    },
-  ];
+
+
   useEffect(()=>{
+    let explicit_inform_slott = {}
+    let implicit_inform_slott = {}
+    let data1=[]
+    for(let i=0;i<props.location.state.chosenSymptomList.length;i++){
+      explicit_inform_slott[props.location.state.chosenSymptomList[i].symptomName]=true
+      data1.push({
+        key:i+1,
+        name:props.location.state.chosenSymptomList[i].symptomName,
+        judge:true,
+        description:props.location.state.chosenSymptomList[i].symptomDescription==""?"暂无描述信息":props.location.state.chosenSymptomList[i].symptomDescription
+      })
+    }
+    setData([...data1])
+    console.log(data1)    
+    setExplicit_inform_slot({...explicit_inform_slott})
+    console.log(explicit_inform_slott)
+    
+
     //通过上个页面传入explicit_inform_slot
     let requestData = {
       action:'diagnose',
       data:{
-        explicit_inform_slot,
-        implicit_inform_slot
+        explicit_inform_slott,
+        implicit_inform_slott
       },
       num
     }
-    http
-      .post("/backend/diagnose", requestData)
-      .then(res => {
-        console.log(res);
-        if (res.result == false){
-          setQuestion(res.symptom)
-          
-        }
-        if (res.status >= 200 && res.status <= 300) {
-          console.log(res)
-          if (res.data)
-          setData([...data,{
-            key:data.length+1,
-            name:,
-            judge:value,
-            description:"啦啦啦啦"
-          }])
-          setValue(null)
-          setShowWarning(false)
-          setNum(num+1)
-        } else {
-          console.log(res.error);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    console.log(requestData)
+    
+    // http
+    //   .post("/backend/diagnose", requestData)
+    //   .then(res => {
+    //     console.log(res);
+    //     setQuestion(res.symptom)
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
 
     setQuestion('头疼')
     //通过上个页面传过来
-    setData([...data1])
+    
   },[])
+
+
+
   return (
     <div>
-      <div>请问您有如下症状嘛，有请选择是，没有请选择否</div>
-      <Card title={question} style={{ 
-        width: "100%",
-        marginBottom:"40px",
-        marginTop:"20px"
-      }}>
-        <Radio.Group onChange={onChange} value={value} style={{
-          display:"flex",
-          justifyContent:"space-around",
-        }}>
-          <Radio value={true}>
-            是
-          </Radio>
-          <Radio value={false}>否</Radio>
-        </Radio.Group>
-        <div style={{
-          display:"flex",
-          flexDirection:"column",
-          justifyContent:"center",
-          alignItems:"center",
-          marginTop:"30px"       
-        }}>
-          <Button type="primary" onClick={submit}>下一题</Button>
-          {showWarning?(
-            <div style={{
-              color:"red",
-              marginTop:"30px"
-
+      {hasResult!=false?(
+        <>
+          <div>请问您有如下症状嘛，有请选择是，没有请选择否</div>
+          <Card title={question} style={{ 
+            width: "100%",
+            marginBottom:"40px",
+            marginTop:"20px"
+          }}>
+            <Radio.Group onChange={onChange} value={value} style={{
+              display:"flex",
+              justifyContent:"space-around",
             }}>
-              请选择是否拥有上述病症
+              <Radio value={true}>
+                是
+              </Radio>
+              <Radio value={false}>否</Radio>
+            </Radio.Group>
+            <div style={{
+              display:"flex",
+              flexDirection:"column",
+              justifyContent:"center",
+              alignItems:"center",
+              marginTop:"30px"       
+            }}>
+              <Button type="primary" onClick={submit}>下一题</Button>
+              {showWarning?(
+                <div style={{
+                  color:"red",
+                  marginTop:"30px"
+
+                }}>
+                  请选择是否拥有上述病症
+                </div>
+              ):(<></>)}
             </div>
-          ):(<></>)}
+          </Card>
+        </>
+      ):(
+        <div style={{
+          marginBottom:"40px",
+          fontSize:"20px",
+          fontWeight:"bolder"
+        }}>
+          疾病诊断结果为：{result}
         </div>
-      </Card>
+      )}
       <div>已选择的病症</div>
       <Table columns={columns} dataSource={data} />
     </div>
