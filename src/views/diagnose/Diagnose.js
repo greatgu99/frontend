@@ -84,9 +84,11 @@ export default function Diagnose(props) {
     let requestData = {
       action: "get_all_symptom",
     };
+    console.log("请求")
     http
       .get("/backend/diagnose", requestData)
       .then(res => {
+        console.log("!!!!!!!!!!!")
         console.log(res);
         setSymptomList(res.symptom_list)
       })
