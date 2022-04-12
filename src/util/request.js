@@ -5,7 +5,7 @@ import axios from "axios";
 // import { getCookie } from "../util/api";
 
 const instance = axios.create({
-  baseURL: "http://127.0.0.1/api",
+  baseURL: "http://124.220.22.44/api",
   timeout: 100000
 });
 /**
