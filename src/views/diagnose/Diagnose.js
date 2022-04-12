@@ -84,16 +84,16 @@ export default function Diagnose(props) {
     let requestData = {
       action: "get_all_symptom",
     };
-    // http
-    //   .get("/backend/diagnose", requestData)
-    //   .then(res => {
-    //     console.log(res);
-    //     setSymptomList(res.symptom_list)
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
-    setSymptomList(testSymptomList);
+    http
+      .get("/backend/diagnose", requestData)
+      .then(res => {
+        console.log(res);
+        setSymptomList(res.symptom_list)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    // setSymptomList(testSymptomList);
   }, []);
 
   return (

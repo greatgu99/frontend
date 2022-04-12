@@ -120,17 +120,17 @@ export default function Dialogue(props){
     }
     console.log(requestData)
     
-    // http
-    //   .post("/backend/diagnose", requestData)
-    //   .then(res => {
-    //     console.log(res);
-    //     setQuestion(res.symptom)
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    http
+      .post("/backend/diagnose", requestData)
+      .then(res => {
+        console.log(res);
+        setQuestion(res.symptom)
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
-    setQuestion('头疼')
+    // setQuestion('头疼')
     //通过上个页面传过来
     
   },[])
