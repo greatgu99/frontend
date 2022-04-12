@@ -86,11 +86,11 @@ export default function Diagnose(props) {
     };
     console.log("请求")
     http
-      .get("/backend/symptom", requestData)
+      .post("/backend/symptom",requestData)
       .then(res => {
         console.log("!!!!!!!!!!!")
         console.log(res);
-        setSymptomList(res.symptom_list)
+        setSymptomList(res.data.symptom_list)
       })
       .catch(error => {
         console.log(error);
