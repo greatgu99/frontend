@@ -86,7 +86,7 @@ export default function Diagnose(props) {
     };
     console.log("请求")
     http
-      .get("/backend/diagnose", requestData)
+      .get("/backend/symptom", requestData)
       .then(res => {
         console.log("!!!!!!!!!!!")
         console.log(res);
