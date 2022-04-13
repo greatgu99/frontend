@@ -10,7 +10,8 @@ import {
 } from "antd";
 import { Input, Space } from "antd";
 import { AudioOutlined } from "@ant-design/icons";
-import http from "../../util/request";
+// import http from "../../util/request";
+import axios from "axios"
 import "./Diagnose.css"; //图表下方dot样式
 
 export default function Diagnose(props) {
@@ -81,20 +82,30 @@ export default function Diagnose(props) {
     { symptomName: "we", symptomDescription: "" },
   ];
   useEffect(() => {
+    console.log(132123131)
     let requestData = {
       action: "get_all_symptom",
     };
     console.log("请求")
-    http
-      .post("/backend/symptom",requestData)
-      .then(res => {
-        console.log("!!!!!!!!!!!")
-        console.log(res);
-        setSymptomList(res.data.symptom_list)
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    
+    axios.get("http://124.220.22.44/api/backend/symptom",requestData)
+    .then(res=>{
+      console.log(res.data)
+      setSymptomList(res.data.symptom_list)
+    })
+    .catch(error => {
+      console.log(error);
+    });
+    // http
+    //   .post("/backend/symptom",requestData)
+    //   .then(res => {
+    //     console.log("!!!!!!!!!!!")
+    //     console.log(res);
+    //     setSymptomList(res.data.symptom_list)
+    //   })
+    //   .catch(error => {
+    //     console.log(error);
+    //   });
     // setSymptomList(testSymptomList);
   }, []);
 
