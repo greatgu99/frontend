@@ -151,7 +151,7 @@ export default function Dialogue(props) {
 
   return (
     <div>
-      {hasResult != false ? (
+      {hasResult == false ? (
         <>
           <div>请问您有如下症状嘛，有请选择是，没有请选择否</div>
           <Card
