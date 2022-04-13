@@ -25,8 +25,16 @@ export default function Diagnose(props) {
     console.log(value);
     let tempSearchedSymptomList = [];
     for (let i = 0; i < symptomList.length; i++) {
-      if (symptomList[i].symptomName.indexOf(value) != -1) {
-        tempSearchedSymptomList.push(symptomList[i]);
+      if (symptomList[i].symptomName.toLowerCase().indexOf(value.toLowerCase()) != -1) {
+        let flag = true
+        for (let j = 0; j<searchedSymptomList.length; j++) {
+          if (searchedSymptomList[j].symptomName.toLowerCase().indexOf(value.toLowerCase()) != -1){
+            flag = false
+          }
+        }
+        if (flag == true){
+          tempSearchedSymptomList.push(symptomList[i]);
+        }
       }
     }
     setSearchedSymptomList([...tempSearchedSymptomList]);
