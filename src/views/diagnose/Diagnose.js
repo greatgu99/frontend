@@ -88,7 +88,9 @@ export default function Diagnose(props) {
     };
     console.log("请求")
     
-    axios.get("http://124.220.22.44/api/backend/symptom",requestData)
+    axios.get("http://124.220.22.44/api/backend/symptom",{
+      action: "get_all_symptom",
+    })
     .then(res=>{
       console.log(res.data)
       setSymptomList(res.data.symptom_list)
