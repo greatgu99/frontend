@@ -49,7 +49,7 @@ export default function Dialogue(props) {
         .post("http://124.220.22.44/api/backend/diagnose", requestData)
         .then((res) => {
           console.log(res);
-          if (res.result == false) {
+          if (res.data.result == false) {
             setData([
               ...data,
               {
@@ -59,12 +59,12 @@ export default function Dialogue(props) {
                 description: "暂无描述",
               },
             ]);
-            setQuestion(res.symptom);
+            setQuestion(res.data.symptom);
             setValue(null);
             setShowWarning(false);
           } else {
             setHasResult(true);
-            setResult(res.disease);
+            setResult(res.data.disease);
           }
         })
         .catch((error) => {
@@ -139,7 +139,7 @@ export default function Dialogue(props) {
       .post("http://124.220.22.44/api/backend/diagnose", requestData)
       .then((res) => {
         console.log(res);
-        setQuestion(res.symptom);
+        setQuestion(res.data.symptom);
       })
       .catch((error) => {
         console.log(error);
