@@ -146,7 +146,7 @@ export default function History(props) {
           footer={[]}
         >
           <h2>explicit symtpom:</h2>
-          {explicitSymptomList1 != undefined && explicitSymptomList1[modalNum] != undefined ? (
+          {explicitSymptomList1 != undefined && explicitSymptomList1[modalNum] != undefined && explicitSymptomList2 != undefined && explicitSymptomList2[modalNum] != undefined? (
             explicitSymptomList1[modalNum].map((item, index) => {
               return (
                 <p>
@@ -160,7 +160,7 @@ export default function History(props) {
             <></>
           )}
           <h2>implicit symtpom:</h2>
-          {implicitSymptomList1 != undefined && implicitSymptomList1[modalNum] != undefined ? (
+          {implicitSymptomList1 != undefined && implicitSymptomList1[modalNum] != undefined && implicitSymptomList2 != undefined && implicitSymptomList2[modalNum] != undefined ? (
             implicitSymptomList1[modalNum].map((item, index) => {
               return (
                 <p>
