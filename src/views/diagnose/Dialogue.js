@@ -64,6 +64,16 @@ export default function Dialogue(props) {
             setShowWarning(false);
           } else {
             setHasResult(true);
+            axios
+              .post("http://124.220.22.44/api/backend/history",{
+                action:'addhistory',
+                data: {
+                  explicit_inform_slot,
+                  implicit_inform_slott,
+                  disease_tag:res.data.disease
+                },
+                token: localStorage.getItem("token"),
+              })
             setResult(res.data.disease);
           }
         })

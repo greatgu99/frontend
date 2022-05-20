@@ -12,6 +12,7 @@ import Nopermission from "../sideMenuRouter/nopermission/Nopermission";
 
 import Diagnose from "../../views/diagnose/Diagnose"
 import Dialogue from "../../views/diagnose/Dialogue"
+import History from "../../views/history/History";
 // import Equip from "../../views/equipManage/equip";
 // import NetCards from "../../views/equipManage/networkCard/netCards";
 // import ConnectManage from "../../views/equipManage/networkCard/connectManage";
@@ -80,61 +81,10 @@ export default function SideMenuRouter(props) {
               }}
             >
               <Switch>
-                {/* <Route path="/equipManage/equip" component={Equip} />
-                <Route
-                  path="/equipManage/networkCard/connectManage"
-                  component={ConnectManage}
-                />
-                <Route
-                  path="/equipManage/networkCard/netCards"
-                  component={NetCards}
-                />
-
-                <Route
-                  path="/storage/hardDiskStorage"
-                  component={HardDiskStorage}
-                />
-                <Route path="/storage/storagePool" component={StoragePool} />
-
-                <Route
-                  path="/perCenter/userInform/perCenter"
-                  component={PerCenter}
-                />
-                <Route path="/perCenter/permissions" component={Permissions} />
-                <Route path="/perCenter/gropus" component={Groups} />
-                <Route path="/perCenter/userLists" component={UserLists} />
-
-                <Route
-                  path="/service/services/SambaServices"
-                  component={SambaServices}
-                />
-                <Route
-                  path="/service/services/NFSService"
-                  component={NFSService}
-                />
-                <Route
-                  path="/service/services/SFTPService"
-                  component={SFTPService}
-                />
-                <Route
-                  path="/service/services/AFPServices"
-                  component={AFPServices}
-                />
-
-                <Route path="/service/servicesList" component={ServicesList} />
-                <Route path="/service/message" component={Message} />
-                <Route path="/service/plugs" component={Plugs} />
-
-                <Route
-                  path="/resourceMonitoring"
-                  component={ResourceMonitoring}
-                />
-
-                <Route path="/logManage" component={LogManage} />
-                */}
                 <Route path="/dialogue" component={Dialogue} />
                 <Route path="/diagnose" component={Diagnose} />
                 <Route path="/home" component={Home} />
+                <Route path="/history" component={History} />
                 <Redirect from="/" to="/home" exact />
                 {/* *匹配任意字符，匹配任何未匹配到的页面 */}
                 <Route path="*" component={Nopermission} />
@@ -149,3 +99,4 @@ export default function SideMenuRouter(props) {
     </div>
   );
 }
+

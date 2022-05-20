@@ -1,9 +1,9 @@
-.formContainer1 {
+.formContainer {
   position: relative;
   position: fixed;
   background-color: white;
   width: 500px;
-  height: 370px;
+  height: 440px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -12,7 +12,7 @@
   border: 1px solid #eee;
 }
 
-.logintitle {
+.registertitle {
   text-align: center;
   height: 80px;
   line-height: 80px;
@@ -43,7 +43,7 @@
   display: inline-block;
   width: 98px;
 }
-.thirdLogin {
+.thirdRegister {
   position: absolute;
   bottom: 13px;
 }

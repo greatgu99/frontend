@@ -9,20 +9,44 @@ import {
   EyeTwoTone
 } from "@ant-design/icons";
 // import http from "../../../util/request";
-import "./Login.css";
+import "./Register.css";
 import axios from "axios"
 import logo from "../../../asset/image/logo.jpg";
 import { validatePasswd, validateAccount } from "../../../util/api";
 // 加密
 // import { Encrypt } from "../../../util/secret";
 
-export default function Login(props) {
+export default function Register(props) {
   // const phoneFormRef = React.createRef();
   const accountFormRef = React.createRef();
   const [isLoading, setisLoading] = useState(false);
-  const [wrongAccountOrPassword,setWrongAccountOrPassword] = useState(true);
+
+  // const validatePasswdAgain = (rule,value) =>{
+  //   if (value){
+  //     accountFormRef.current.validateFields().then(value => {
+  //       if (value.password !== value.passwordagin){
+  //         return Promise.reject(
+  //           "请与输入的密码保持一致"
+  //         );
+  //       } else {
+  //         return Promise.resolve()
+  //       }
+  //     })
+  //   } else {
+  //     return Promise.resolve()
+  //   }
+    
+  // }
+
+  const goBackToLogin= ()=>{
+    props.history.push({
+      pathname:"/Login",
+    });
+  }
+
+
   // 账号密码登录
-  const accountLogin = () => {
+  const accountRegister = () => {
     accountFormRef.current.validateFields().then(value => {
       console.log(value);
 
@@ -30,39 +54,28 @@ export default function Login(props) {
       //   // 调用登录接口，成功存储token到sessionStorage
       // const encryptionPasswd = Encrypt(value.password);
       setisLoading(true);
+      // props.history.push("/");
+      // window.location.reload(true);
       axios.post("http://124.220.22.44/api/backend/login",{
-        action: "login",
+        action: "register",
         data:{
           username: value.account, 
           password: value.password 
         }
       })
       .then(res=>{
-        if (res.data.result){
-          localStorage.setItem("token", res.data.token);
-          props.history.push("/");
-          
-          window.location.reload(true);
-          message.success("登陆成功！");
-        } else {
-          message.error("登陆失败,账号信息输入错误！");
+        if (res.data.result == false){
+          message.error("用户名已存在，请更换用户名！");
         }
         setisLoading(false);
-        
+        props.history.push("/");
+        window.location.reload(true);
       })
       .catch(error => {
         console.log(error);
-        setisLoading(false);
       });
     });
   };
-
-  const navigateToRegister= ()=>{
-    props.history.push({
-      pathname:"/Register",
-    });
-  }
-
 
   return (
     <div
@@ -72,14 +85,14 @@ export default function Login(props) {
         overflow: "hidden"
       }}
     >
-      <div className="formContainer1">
+      <div className="formContainer">
         <img width={100} src={logo} className="logoImg" alt="显示失败!" />
 
-        <div className="logintitle" style={{
+        <div className="registertitle" style={{
           marginBottom:"20px"
-        }}>自动诊断系统</div>
+        }}>用户注册</div>
 
-        <Form name="normal_login" className="login-form" ref={accountFormRef}>
+        <Form name="normal_register" className="register-form" ref={accountFormRef}>
           <Form.Item
             name="account"
             rules={[
@@ -99,6 +112,7 @@ export default function Login(props) {
               maxLength={30}
             />
           </Form.Item>
+
           <Form.Item
             name="password"
             rules={[
@@ -122,6 +136,33 @@ export default function Login(props) {
             />
           </Form.Item>
           <Form.Item
+            name="passwordagain"
+            rules={[
+              {
+                required: true,
+                message: "请再次输入你的密码!"
+              },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(new Error("两次输入的密码不相同!"));
+                }
+              })
+            ]}
+          >
+            <Input.Password
+              prefix={<LockOutlined className="site-form-item-icon" />}
+              placeholder="请再次输入密码"
+              iconRender={visible =>
+                visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />
+              }
+              allowClear
+              // onChange={inputChangePassWord}
+            />
+          </Form.Item>
+          <Form.Item
             name="agreement"
             valuePropName="checked"
             rules={[
@@ -137,32 +178,31 @@ export default function Login(props) {
               我已阅读并同意 <a href="">《自动诊断系统用户须知》</a>
             </Checkbox>
           </Form.Item>
-
           <Form.Item>
+          <Button
+              style={{
+                width: "220px",
+                marginLeft: "120px",
+                marginBottom:"12px"
+              }}
+              type="primary"
+              htmlType="submit"
+              className="register-form-button"
+              onClick={accountRegister}
+              loading={isLoading}
+            >
+              注册
+            </Button>
             <Button
               style={{
                 width: "220px",
                 marginLeft: "120px"
               }}
               type="primary"
-              htmlType="submit"
-              className="login-form-button"
-              onClick={accountLogin}
-              loading={isLoading}
+              onClick={goBackToLogin}
             >
-              登录
+              返回
             </Button>
-            <div style={{
-              marginTop:"12px",
-              display:"flex",
-              flexDirection:"row",
-              justifyContent:"space-between",
-              fontSize:"14px",
-              color:"rgb(24,144,255)"
-            }}>
-              <div onClick={()=>navigateToRegister()}>注册用户</div>
-              <div>忘记密码</div>
-            </div>
           </Form.Item>
         </Form>
       </div>
