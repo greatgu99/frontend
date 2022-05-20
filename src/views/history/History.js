@@ -22,6 +22,7 @@ export default function History(props) {
       })
       .then((res) => {
         console.log(res.data);
+        let data = res.data.data
         // let res={}
         // res.data=[]
         // res.data.push({explicit_symptom:{abc:true,qwe:true},implicit_symptom:{sdf:false,dfg:false},disease_tag:'qwe',date:'998'})
@@ -34,13 +35,13 @@ export default function History(props) {
           t6 = [],
           t7 = [];
 
-        for (let i = 0; i < res.data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
           let tt1 = [],
             tt2 = [];
-          for (let j in res.data[i].explicit_symptom) {
+          for (let j in data[i].explicit_symptom) {
             // console.log(j,)
             tt1.push(j);
-            if (res.data[i].explicit_symptom[j]) {
+            if (data[i].explicit_symptom[j]) {
               tt2.push("True");
             } else {
               tt2.push("False");
@@ -50,9 +51,9 @@ export default function History(props) {
           t6.push(tt2);
           tt1 = [];
           tt2 = [];
-          for (let j in res.data[i].implicit_symptom) {
+          for (let j in data[i].implicit_symptom) {
             tt1.push(j);
-            if (res.data[i].implicit_symptom[j]) {
+            if (data[i].implicit_symptom[j]) {
               tt2.push("True");
             } else {
               tt2.push("False");
@@ -60,13 +61,13 @@ export default function History(props) {
           }
           t2.push(tt1);
           t7.push(tt2);
-          t3.push(res.data[i].disease_tag);
+          t3.push(data[i].disease_tag);
           t5 = {};
           t5.key = i;
           t5.index = i + 1;
           t5.details = i;
-          t5.data = res.data[i].date;
-          t5.result = res.data[i].disease_tag;
+          t5.data = data[i].date;
+          t5.result = data[i].disease_tag;
           t4.push(t5);
         }
         setExplicitSymptomList1(t1);
