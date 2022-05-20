@@ -77,7 +77,9 @@ export default function History(props) {
           t5.result = data[i].disease_tag;
           t4.push(t5);
         }
+        console.log(t1);
         setExplicitSymptomList1(t1);
+        console.log(t2);
         setImplicitSymptomList1(t2);
         console.log(t6);
         setExplicitSymptomList2(t6);
@@ -144,7 +146,7 @@ export default function History(props) {
           footer={[]}
         >
           <h2>explicit symtpom:</h2>
-          {explicitSymptomList1[modalNum] != undefined ? (
+          {explicitSymptomList1 != undefined && explicitSymptomList1[modalNum] != undefined ? (
             explicitSymptomList1[modalNum].map((item, index) => {
               return (
                 <p>
@@ -158,7 +160,7 @@ export default function History(props) {
             <></>
           )}
           <h2>implicit symtpom:</h2>
-          {implicitSymptomList1[modalNum] != undefined ? (
+          {implicitSymptomList1 != undefined && implicitSymptomList1[modalNum] != undefined ? (
             implicitSymptomList1[modalNum].map((item, index) => {
               return (
                 <p>
