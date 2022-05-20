@@ -91,7 +91,7 @@ export default function Dialogue(props) {
         });
 
       //异步请求
-      setImplicit_inform_slot({ ...implicit_inform_slot, question: value });
+      setImplicit_inform_slot({ ...implicit_inform_slot, [question]: value });
       setNum(num + 1);
     }
   };

@@ -38,17 +38,22 @@ export default function History(props) {
           t7 = [];
 
         for (let i = 0; i < data.length; i++) {
+          console.log("1111111111111111")
           let tt1 = [],
             tt2 = [];
           for (let j in data[i].explicit_symptom) {
             // console.log(j,)
+            console.log("7777777777")
             tt1.push(j);
+            console.log("8888888888")
             if (data[i].explicit_symptom[j]) {
               tt2.push("True");
             } else {
               tt2.push("False");
             }
+            console.log("9999999999")
           }
+          console.log("2222222222222222")
           t1.push(tt1);
           t6.push(tt2);
           tt1 = [];
@@ -61,6 +66,7 @@ export default function History(props) {
               tt2.push("False");
             }
           }
+          console.log("333333333333333")
           t2.push(tt1);
           t7.push(tt2);
           t3.push(data[i].disease_tag);
