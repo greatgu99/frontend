@@ -25,10 +25,9 @@ export default function History(props) {
         let data = res.data.data
         console.log(res.data.data)
         console.log(data)
-        // let res={}
-        // res.data=[]
-        // res.data.push({explicit_symptom:{abc:true,qwe:true},implicit_symptom:{sdf:false,dfg:false},disease_tag:'qwe',date:'998'})
-        // res.data.push({explicit_symptom:{def:true,wer:true},implicit_symptom:{sdf:false,dfg:false},disease_tag:'qwe',date:'998'})
+        // let data=[]
+        // data.push({explicit_symptom:{abc:true,qwe:true},implicit_symptom:{sdf:false,dfg:false},disease_tag:'qwe',date:'998'})
+        // data.push({explicit_symptom:{def:true,wer:true},implicit_symptom:{sdf:false,dfg:false},disease_tag:'qwe',date:'998'})
         let t1 = [],
           t2 = [],
           t3 = [],
@@ -36,7 +35,7 @@ export default function History(props) {
           t5 = {},
           t6 = [],
           t7 = [];
-
+        console.log("00000000000000000")
         for (let i = 0; i < data.length; i++) {
           console.log("1111111111111111")
           let tt1 = [],
@@ -120,9 +119,9 @@ export default function History(props) {
       title: "详情",
       key: "details",
       dataIndex: "details",
-      render: (item) => (
+      render: (item,index) => (
         <>
-          <Button type="primary" onClick={() => showModal(item)}>
+          <Button key={index} type="primary" onClick={() => showModal(item)}>
             查看详情
           </Button>
         </>
