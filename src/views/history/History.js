@@ -23,6 +23,8 @@ export default function History(props) {
       .then((res) => {
         console.log(res.data);
         let data = res.data.data
+        console.log(res.data.data)
+        console.log(data)
         // let res={}
         // res.data=[]
         // res.data.push({explicit_symptom:{abc:true,qwe:true},implicit_symptom:{sdf:false,dfg:false},disease_tag:'qwe',date:'998'})
