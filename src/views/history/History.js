@@ -22,6 +22,12 @@ export default function History(props) {
       })
       .then((res) => {
         console.log(res.data);
+        if (res.data.ret == -7){
+          localStorage.removeItem("token");
+          props.history.push("/");
+          window.location.reload(true);
+          message.success("登录超时请重新登录！");
+        }
         let data = res.data.data
         console.log(res.data.data)
         console.log(data)

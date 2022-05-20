@@ -9,6 +9,7 @@ import {
   Tag,
   Radio,
   Table,
+  message,
 } from "antd";
 import { Input, Space } from "antd";
 import { AudioOutlined } from "@ant-design/icons";
@@ -78,10 +79,17 @@ export default function Dialogue(props) {
                 action:'addhistory',
                 data: {
                   explicit_inform_slot,
-                  implicit_inform_slot,
+                  implicit_inform_slot:{ ...implicit_inform_slot, [question]: value },
                   disease_tag:res.data.disease
                 },
                 token: localStorage.getItem("token"),
+              }).then((res)=>{
+                if (res.data.ret == -7){
+                  localStorage.removeItem("token");
+                  props.history.push("/");
+                  window.location.reload(true);
+                  message.success("登录超时请重新登录！");
+                }
               })
             setResult(res.data.disease);
           }
